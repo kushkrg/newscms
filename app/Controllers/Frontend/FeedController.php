@@ -79,7 +79,7 @@ class FeedController
         $xml .= '  <atom:link href="' . $this->xmlEscape($feedLink) . '" rel="self" type="application/rss+xml"/>' . "\n";
 
         foreach ($posts as $post) {
-            $postUrl = $baseUrl . '/article/' . $post['slug'];
+            $postUrl = $baseUrl . '/' . $post['slug'];
             $pubDate = date('r', strtotime($post['published_at']));
             $excerpt = !empty($post['excerpt']) ? $post['excerpt'] : mb_substr(strip_tags($post['content'] ?? ''), 0, 300);
 

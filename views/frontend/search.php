@@ -45,7 +45,7 @@ $total = isset($paginator) ? $paginator->total : count($posts);
                 <?php // ─── Search Results List ─── ?>
                 <div class="search-results">
                     <?php foreach ($posts as $p):
-                        $resultUrl  = url('article/' . $p['slug']);
+                        $resultUrl  = url($p['slug']);
                         $resultDate = !empty($p['published_at']) ? date('M j, Y', strtotime($p['published_at'])) : '';
                     ?>
                         <div class="search-result">

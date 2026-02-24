@@ -43,8 +43,7 @@ use App\Controllers\Frontend\ContactController;
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/page/{page}', [HomeController::class, 'index']);
 
-// Single article
-$router->get('/article/{slug}', [PostController::class, 'show']);
+// Single article (clean URL: /slug instead of /article/slug)
 
 // Category listing
 $router->get('/category/{slug}', [CategoryController::class, 'index']);
@@ -172,7 +171,8 @@ $router->post('/admin/subscribers/{id}/update', [AdminSubscriberController::clas
 $router->post('/admin/subscribers/{id}/delete', [AdminSubscriberController::class, 'delete']);
 
 // ============================================================
-//  Static Page Catch-All (MUST be registered last)
+//  Post / Page Catch-All (MUST be registered last)
+//  Tries to resolve as a post first, then falls back to a static page.
 // ============================================================
 
-$router->get('/{slug}', [PageController::class, 'show']);
+$router->get('/{slug}', [PostController::class, 'show']);

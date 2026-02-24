@@ -68,7 +68,7 @@ class SitemapController
             $lastmod = date('c', strtotime($post['updated_at'] ?? $post['published_at']));
 
             $xml .= "  <url>\n";
-            $xml .= '    <loc>' . $this->xmlEscape($baseUrl . '/article/' . $post['slug']) . "</loc>\n";
+            $xml .= '    <loc>' . $this->xmlEscape($baseUrl . '/' . $post['slug']) . "</loc>\n";
             $xml .= '    <lastmod>' . $lastmod . "</lastmod>\n";
             $xml .= "    <changefreq>weekly</changefreq>\n";
             $xml .= "    <priority>0.8</priority>\n";

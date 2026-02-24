@@ -37,7 +37,7 @@ class CommentController
         if (!Recaptcha::verify($recaptchaToken, 'comment')) {
             $postId = (int) $request->post('post_id', 0);
             $post   = $postId ? Post::find($postId) : null;
-            $redirectUrl = $post ? url('article/' . $post['slug'] . '#comments') : url('/');
+            $redirectUrl = $post ? url($post['slug'] . '#comments') : url('/');
             Session::flash('error', 'reCAPTCHA verification failed. Please try again.');
             Response::redirect($redirectUrl);
             return;
@@ -49,7 +49,7 @@ class CommentController
             // Bot detected -- silently redirect back
             $postId = (int) $request->post('post_id', 0);
             $post   = $postId ? Post::find($postId) : null;
-            $redirectUrl = $post ? url('article/' . $post['slug']) : url('/');
+            $redirectUrl = $post ? url($post['slug']) : url('/');
             Response::redirect($redirectUrl);
             return;
         }
@@ -60,7 +60,7 @@ class CommentController
             Session::flash('error', 'You are posting too quickly. Please wait a moment.');
             $postId = (int) $request->post('post_id', 0);
             $post   = $postId ? Post::find($postId) : null;
-            $redirectUrl = $post ? url('article/' . $post['slug'] . '#comments') : url('/');
+            $redirectUrl = $post ? url($post['slug'] . '#comments') : url('/');
             Response::redirect($redirectUrl);
             return;
         }
@@ -87,7 +87,7 @@ class CommentController
             Session::flash('old', $data);
             $postId = (int) $data['post_id'];
             $post   = $postId ? Post::find($postId) : null;
-            $redirectUrl = $post ? url('article/' . $post['slug'] . '#comments') : url('/');
+            $redirectUrl = $post ? url($post['slug'] . '#comments') : url('/');
             Response::redirect($redirectUrl);
             return;
         }
@@ -103,7 +103,7 @@ class CommentController
         // Optionally check if comments are disabled on this post
         if (isset($post['allow_comments']) && !$post['allow_comments']) {
             Session::flash('error', 'Comments are closed for this article.');
-            Response::redirect(url('article/' . $post['slug']));
+            Response::redirect(url($post['slug']));
             return;
         }
 
@@ -129,6 +129,6 @@ class CommentController
 
         // Flash success and redirect back to the post
         Session::flash('success', 'Comment submitted for moderation.');
-        Response::redirect(url('article/' . $post['slug'] . '#comments'));
+        Response::redirect(url($post['slug'] . '#comments'));
     }
 }

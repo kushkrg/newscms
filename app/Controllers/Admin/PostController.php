@@ -286,8 +286,8 @@ class PostController
 
             // Create 301 redirect from the old URL to the new one
             Redirect::create([
-                'from_path' => '/article/' . $post['slug'],
-                'to_url'    => url('article/' . $newSlug),
+                'from_path' => '/' . $post['slug'],
+                'to_url'    => url($newSlug),
                 'type'      => 301,
             ]);
         } else {

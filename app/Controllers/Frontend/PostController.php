@@ -18,6 +18,7 @@ class PostController
 {
     /**
      * Display a single published post by its slug.
+     * Falls back to PageController if no matching post is found.
      */
     public function show(Request $request, array $params): void
     {
@@ -25,7 +26,8 @@ class PostController
         $post = Post::findBySlug($slug);
 
         if (!$post || $post['status'] !== 'published') {
-            Response::notFound();
+            // Delegate to PageController for static pages
+            (new PageController())->show($request, $params);
             return;
         }
 
@@ -52,7 +54,7 @@ class PostController
         $seo = new SEO();
         $seo->setTitle($post['title'])
             ->setDescription($description)
-            ->setCanonical(url('article/' . $post['slug']))
+            ->setCanonical(url($post['slug']))
             ->setType('article');
 
         if (!empty($post['featured_image'])) {
@@ -81,7 +83,7 @@ class PostController
         if ($category) {
             $breadcrumbs[] = ['name' => $category['name'], 'url' => url('category/' . $category['slug'])];
         }
-        $breadcrumbs[] = ['name' => $post['title'], 'url' => url('article/' . $post['slug'])];
+        $breadcrumbs[] = ['name' => $post['title'], 'url' => url($post['slug'])];
         $seo->setBreadcrumbs($breadcrumbs);
 
         // Render

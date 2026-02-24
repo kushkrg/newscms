@@ -242,7 +242,7 @@ class SEO
             'dateModified' => date('c', strtotime($post['updated_at'])),
             'mainEntityOfPage' => [
                 '@type' => 'WebPage',
-                '@id' => $baseUrl . '/article/' . $post['slug'],
+                '@id' => $baseUrl . '/' . $post['slug'],
             ],
         ];
 

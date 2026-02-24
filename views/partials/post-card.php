@@ -1,6 +1,6 @@
 <?php
 /** @var array $post */
-$postUrl = url('article/' . $post['slug']);
+$postUrl = url($post['slug']);
 $hasImage = !empty($post['featured_image']);
 $readingTime = !empty($post['reading_time_mins']) ? (int) $post['reading_time_mins'] : null;
 $publishedDate = !empty($post['published_at']) ? date('M j, Y', strtotime($post['published_at'])) : '';

@@ -21,7 +21,7 @@ $isFirstPage = ($currentPage ?? 1) === 1;
 <?php // ─── Hero Section (Featured post, first page only) ─── ?>
 <?php if (!empty($featured) && $isFirstPage):
     $hero = $featured[0];
-    $heroUrl = url('article/' . $hero['slug']);
+    $heroUrl = url($hero['slug']);
     $heroDate = !empty($hero['published_at']) ? date('M j, Y', strtotime($hero['published_at'])) : '';
     $heroReadingTime = !empty($hero['reading_time_mins']) ? (int) $hero['reading_time_mins'] : null;
     $hasHeroImage = !empty($hero['featured_image']);
