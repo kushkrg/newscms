@@ -1,0 +1,904 @@
+/* ============================================================
+   Admin Panel Stylesheet — News/Blog CMS
+   Black & White Design System
+   ============================================================ */
+
+/* ----- Reset & Base ----- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #0A0A0A;
+    background-color: #FAFAFA;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ----- Typography ----- */
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.25;
+    color: #0A0A0A;
+}
+
+h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.375rem; margin-bottom: 0.5rem; }
+h3 { font-size: 1.125rem; margin-bottom: 0.375rem; }
+h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+
+p { margin-bottom: 1rem; }
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ----- Sidebar ----- */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f8f8;
+    border-right: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0A0A0A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-header a {
+    color: inherit;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 0.75rem 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 450;
+    color: #404040;
+    border-radius: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    background-color: #ececec;
+    color: #0A0A0A;
+}
+
+.nav-link.active {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.nav-link.active .nav-icon {
+    opacity: 1;
+}
+
+.nav-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+.nav-link.active .nav-icon,
+.nav-link:hover .nav-icon {
+    opacity: 1;
+}
+
+.sidebar-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e5e5;
+    font-size: 0.8125rem;
+    color: #737373;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.sidebar-footer a {
+    color: #737373;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+.sidebar-footer a:hover {
+    color: #0A0A0A;
+}
+
+/* ----- Main Content ----- */
+
+.main-content {
+    margin-left: 250px;
+    flex: 1;
+    min-height: 100vh;
+    padding: 2rem 2.5rem;
+    max-width: 100%;
+}
+
+/* ----- Top Header Bar ----- */
+
+.top-header {
+    position: sticky;
+    top: 0;
+    margin: -2rem -2.5rem 2rem -2.5rem;
+    padding: 0.875rem 2.5rem;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+.top-header h1 {
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+
+.top-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* ----- Hamburger (mobile) ----- */
+
+.sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    color: #0A0A0A;
+}
+
+.sidebar-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 90;
+}
+
+/* ============================================================
+   Flash Messages
+   ============================================================ */
+
+.flash-message {
+    padding: 0.875rem 1.125rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e5e5e5;
+    border-left: 4px solid #a3a3a3;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.flash-success {
+    border-left-color: #22c55e;
+}
+
+.flash-error {
+    border-left-color: #ef4444;
+}
+
+.flash-close {
+    background: none;
+    border: none;
+    font-size: 1.125rem;
+    cursor: pointer;
+    color: #a3a3a3;
+    padding: 0.125rem 0.375rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+}
+
+.flash-close:hover {
+    color: #0A0A0A;
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #737373;
+    border-bottom: 2px solid #0A0A0A;
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    color: #262626;
+}
+
+.data-table tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.data-table td a {
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+
+.data-table td a:hover {
+    border-bottom-color: #0A0A0A;
+}
+
+/* ============================================================
+   Cards & Stats
+   ============================================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: #FFFFFF;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+}
+
+.stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #0A0A0A;
+    margin-bottom: 0.25rem;
+}
+
+.stat-card .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #737373;
+}
+
+/* ============================================================
+   Forms
+   ============================================================ */
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #0A0A0A;
+    margin-bottom: 0.375rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: #0A0A0A;
+    background-color: #FFFFFF;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #0A0A0A;
+    box-shadow: 0 0 0 2px rgba(10, 10, 10, 0.08);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23737373' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.25rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+}
+
+.form-hint {
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    margin-top: 0.25rem;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1.125rem;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+        color 0.15s ease, box-shadow 0.15s ease;
+    white-space: nowrap;
+}
+
+.btn:focus-visible {
+    outline: 2px solid #0A0A0A;
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    border-color: #0A0A0A;
+}
+
+.btn-primary:hover {
+    background-color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: #0A0A0A;
+    border-color: #0A0A0A;
+}
+
+.btn-secondary:hover {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+}
+
+.btn-danger {
+    background-color: #0A0A0A;
+    color: #ef4444;
+    border-color: #0A0A0A;
+}
+
+.btn-danger:hover {
+    background-color: #1a1a1a;
+}
+
+.btn-sm {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.btn-inline {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #0A0A0A;
+    font-weight: 500;
+    border-radius: 0;
+}
+
+.btn-inline:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   Status Badges
+   ============================================================ */
+
+.status-badge {
+    display: inline-block;
+    padding: 0.175rem 0.55rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 999px;
+    text-transform: uppercase;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.status-draft {
+    background-color: #e5e5e5;
+    color: #525252;
+}
+
+.status-published {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+}
+
+.status-archived {
+    background-color: #f5f5f5;
+    color: #a3a3a3;
+}
+
+.status-pending {
+    background-color: transparent;
+    color: #525252;
+    border: 1px solid #a3a3a3;
+}
+
+/* ============================================================
+   Media Grid
+   ============================================================ */
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.media-card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease;
+}
+
+.media-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.media-card .media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.5rem;
+}
+
+.media-card:hover .media-overlay {
+    opacity: 1;
+}
+
+.media-card .media-overlay span {
+    font-size: 0.6875rem;
+    color: #FFFFFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   Pagination
+   ============================================================ */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1.5rem 0;
+    list-style: none;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+    color: #525252;
+    background-color: #FFFFFF;
+    transition: background-color 0.15s ease, color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+    border-color: #d4d4d4;
+    color: #0A0A0A;
+}
+
+.pagination .active,
+.pagination .active:hover {
+    background-color: #0A0A0A;
+    border-color: #0A0A0A;
+    color: #FFFFFF;
+}
+
+.pagination .disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* ============================================================
+   Two-Column Post Editor
+   ============================================================ */
+
+.editor-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.editor-main {
+    min-width: 0;
+}
+
+.editor-sidebar {
+    position: sticky;
+    top: 5rem;
+    min-width: 0;
+}
+
+.editor-sidebar .form-group {
+    background-color: #FFFFFF;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.editor-sidebar .form-group > label:first-child {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #737373;
+    margin-bottom: 0.625rem;
+}
+
+/* ============================================================
+   SEO Section
+   ============================================================ */
+
+.seo-section {
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    margin-top: 1.5rem;
+    overflow: hidden;
+}
+
+.seo-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1.25rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0A0A0A;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.seo-toggle::after {
+    content: "+";
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: #737373;
+    transition: transform 0.2s ease;
+}
+
+.seo-section.open .seo-toggle::after {
+    content: "\2212"; /* minus sign */
+}
+
+.seo-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+}
+
+.seo-section.open .seo-body {
+    display: block;
+}
+
+/* ============================================================
+   Filter Bar
+   ============================================================ */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-bar select,
+.filter-bar input[type="text"],
+.filter-bar input[type="search"] {
+    width: auto;
+    min-width: 160px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8125rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+}
+
+.filter-bar select:focus,
+.filter-bar input:focus {
+    border-color: #0A0A0A;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(10, 10, 10, 0.08);
+}
+
+/* ============================================================
+   Pending Badge (Sidebar)
+   ============================================================ */
+
+.pending-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background-color: #ef4444;
+    border-radius: 999px;
+    line-height: 1;
+    margin-left: auto;
+}
+
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+
+.text-muted {
+    color: #a3a3a3;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: #a3a3a3;
+}
+
+.empty-state p {
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+}
+
+/* ============================================================
+   Responsive — Mobile (max 768px)
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: none;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .sidebar-toggle {
+        display: inline-flex;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1.25rem;
+    }
+
+    .top-header {
+        margin: -1.25rem -1.25rem 1.25rem -1.25rem;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .editor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .editor-sidebar {
+        position: static;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-bar select,
+    .filter-bar input[type="text"],
+    .filter-bar input[type="search"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .media-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+}
+
+/* ============================================================
+   Responsive — Small (max 480px)
+   ============================================================ */
+
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+}

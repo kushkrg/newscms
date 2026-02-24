@@ -1,0 +1,10 @@
+.env
+vendor/
+storage/logs/*.log
+storage/cache/*
+public/uploads/*
+!public/uploads/.htaccess
+!public/uploads/images/.gitkeep
+!public/uploads/avatars/.gitkeep
+node_modules/
+.DS_Store

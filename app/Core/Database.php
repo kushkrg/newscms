@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Core;
+
+use PDO;
+use PDOException;
+
+class Database
+{
+    private static ?PDO $instance = null;
+
+    public static function getInstance(): PDO
+    {
+        if (self::$instance === null) {
+            $config = require CONFIG_PATH . '/config.php';
+            $db = $config['db'];
+
+            $dsn = "mysql:host={$db['host']};port={$db['port']};dbname={$db['name']};charset=utf8mb4";
+
+            try {
+                self::$instance = new PDO($dsn, $db['user'], $db['pass'], [
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES    => false,
+                ]);
+            } catch (PDOException $e) {
+                throw new \RuntimeException('Database connection failed: ' . $e->getMessage());
+            }
+        }
+
+        return self::$instance;
+    }
+
+    public static function query(string $sql, array $params = []): \PDOStatement
+    {
+        $stmt = self::getInstance()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    }
+
+    public static function lastInsertId(): string
+    {
+        return self::getInstance()->lastInsertId();
+    }
+}

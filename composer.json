@@ -1,0 +1,13 @@
+{
+    "name": "newscms/blog",
+    "description": "News/Blog CMS in Core PHP",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "php": ">=8.1"
+    }
+}
