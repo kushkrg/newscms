@@ -95,10 +95,12 @@
     </div>
 </form>
 
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
 <script>
     tinymce.init({
         selector: '#editor',
+        base_url: 'https://cdn.jsdelivr.net/npm/tinymce@6',
+        suffix: '.min',
         height: 400,
         menubar: false,
         plugins: 'lists link image code table wordcount fullscreen media',

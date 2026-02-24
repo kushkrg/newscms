@@ -2344,7 +2344,7 @@ small {
   }
 
   .hero__title {
-    font-size: var(--text-4xl);
+    font-size: 3rem;
   }
 
   .hero__excerpt {
@@ -2542,6 +2542,144 @@ small {
   }
 }
 
+
+/* ==========================================================================
+   Flash Messages (Frontend)
+   ========================================================================== */
+
+.flash-message {
+  margin-bottom: var(--space-lg);
+  border-radius: 8px;
+  overflow: hidden;
+  animation: flashSlideIn 0.4s ease-out;
+}
+
+@keyframes flashSlideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.flash-message__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 8px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.flash-message--success .flash-message__inner {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid #6ee7b7;
+  color: #065f46;
+}
+
+.flash-message--error .flash-message__inner {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.flash-message__icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.flash-message--success .flash-message__icon { color: #059669; }
+.flash-message--error .flash-message__icon   { color: #dc2626; }
+
+.flash-message__text {
+  flex: 1;
+  font-weight: 500;
+}
+
+.flash-message__close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.flash-message__close:hover { opacity: 1; }
+.flash-message--success .flash-message__close { color: #065f46; }
+.flash-message--error .flash-message__close   { color: #991b1b; }
+
+/* Contact-specific success state — replaces the form with a thank-you card */
+.contact-success-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 1px solid #6ee7b7;
+  border-radius: 12px;
+  animation: flashSlideIn 0.5s ease-out;
+}
+
+.contact-success-card .success-icon-ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #d1fae5;
+  border: 3px solid #6ee7b7;
+  margin-bottom: var(--space-lg);
+  animation: successPop 0.5s ease-out 0.2s both;
+}
+
+@keyframes successPop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.contact-success-card .success-icon-ring svg {
+  color: #059669;
+}
+
+.contact-success-card h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: #065f46;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.contact-success-card p {
+  color: #047857;
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-lg) 0;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-success-card .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-xs) var(--space-lg);
+  border: 2px solid #059669;
+  color: #059669;
+  background: transparent;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.contact-success-card .btn-outline:hover {
+  background: #059669;
+  color: #fff;
+}
 
 /* ==========================================================================
    Contact Form

@@ -43,7 +43,7 @@ $isFirstPage = ($currentPage ?? 1) === 1;
                 </a>
             <?php endif; ?>
 
-            <h1 class="hero__title">
+            <h1 class="hero__title" style="font-size: 3rem;">
                 <a href="<?= h($heroUrl) ?>"><?= h($hero['title']) ?></a>
             </h1>
 

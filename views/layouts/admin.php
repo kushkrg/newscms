@@ -101,6 +101,19 @@
                         <?php endif; ?>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= url('admin/messages') ?>" class="nav-link<?= ($currentPage ?? '') === 'messages' ? ' active' : '' ?>">
+                        <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span>Messages</span>
+                        <?php
+                        $unreadMsgCount = \App\Models\Message::unreadCount();
+                        if ($unreadMsgCount > 0): ?>
+                            <span class="nav-badge"><?= (int) $unreadMsgCount ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
 
                 <?php if (\App\Core\Auth::hasRole('super_admin')): ?>
                 <li class="nav-item">

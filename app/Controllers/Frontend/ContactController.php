@@ -12,6 +12,7 @@ use App\Core\Session;
 use App\Core\SEO;
 use App\Core\Validator;
 use App\Core\View;
+use App\Models\Message;
 use App\Models\Page;
 
 class ContactController
@@ -88,7 +89,16 @@ class ContactController
         // Send email (if SMTP is configured) or store the message
         $this->sendContactEmail($data);
 
-        Session::flash('success', 'Thank you for your message! We\'ll get back to you soon.');
+        // Store in DB
+        Message::create([
+            'name'       => $data['name'],
+            'email'      => $data['email'],
+            'subject'    => $data['subject'],
+            'message'    => $data['message'],
+            'ip_address' => $request->ip(),
+        ]);
+
+        Session::flash('contact_success', true);
         Response::redirect(url('contact'));
     }
 

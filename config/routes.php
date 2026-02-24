@@ -25,6 +25,7 @@ use App\Controllers\Admin\UserController;
 use App\Controllers\Admin\SettingController;
 use App\Controllers\Admin\RedirectController;
 use App\Controllers\Admin\AdController;
+use App\Controllers\Admin\MessageController as AdminMessageController;
 use App\Controllers\Admin\SubscriberController as AdminSubscriberController;
 use App\Controllers\Frontend\SubscribeController;
 use App\Controllers\Frontend\ContactController;
@@ -159,6 +160,12 @@ $router->post('/admin/redirects/{id}/delete', [RedirectController::class, 'delet
 // Ads
 $router->get('/admin/ads', [AdController::class, 'index']);
 $router->post('/admin/ads/save', [AdController::class, 'save']);
+
+// Messages
+$router->get('/admin/messages', [AdminMessageController::class, 'index']);
+$router->get('/admin/messages/{id}', [AdminMessageController::class, 'show']);
+$router->post('/admin/messages/{id}/reply', [AdminMessageController::class, 'reply']);
+$router->post('/admin/messages/{id}/delete', [AdminMessageController::class, 'delete']);
 
 // Subscribers
 $router->get('/admin/subscribers', [AdminSubscriberController::class, 'index']);
