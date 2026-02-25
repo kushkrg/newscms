@@ -9,16 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
      * ----------------------------------------------------- */
     const navToggle = document.querySelector('.nav-toggle');
     const navOverlay = document.querySelector('.nav-overlay');
+    const navClose = document.querySelector('.nav-overlay__close');
+    const navBackdrop = document.querySelector('.nav-overlay__backdrop');
 
     function openMobileNav() {
         navToggle.classList.add('active');
         navOverlay.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
     }
 
     function closeMobileNav() {
         navToggle.classList.remove('active');
         navOverlay.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
 
@@ -27,6 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOpen = navToggle.classList.contains('active');
             isOpen ? closeMobileNav() : openMobileNav();
         });
+
+        // Close button inside the panel
+        if (navClose) {
+            navClose.addEventListener('click', closeMobileNav);
+        }
+
+        // Close on backdrop click
+        if (navBackdrop) {
+            navBackdrop.addEventListener('click', closeMobileNav);
+        }
 
         // Close when a navigation link inside the overlay is clicked
         navOverlay.querySelectorAll('a').forEach(link => {

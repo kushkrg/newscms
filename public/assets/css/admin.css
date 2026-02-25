@@ -177,6 +177,68 @@ p { margin-bottom: 1rem; }
 
 /* ----- Top Header Bar ----- */
 
+.content-header {
+    position: sticky;
+    top: 0;
+    margin: -2rem -2.5rem 2rem -2.5rem;
+    padding: 0.875rem 2.5rem;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.content-header .page-title {
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.header-user {
+    font-size: 0.85rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.btn-view-site {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #059669;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-view-site:hover {
+    background: #059669;
+    color: #fff;
+    border-color: #059669;
+}
+
+.btn-view-site svg {
+    flex-shrink: 0;
+}
+
 .top-header {
     position: sticky;
     top: 0;
@@ -843,6 +905,19 @@ select {
     .top-header {
         margin: -1.25rem -1.25rem 1.25rem -1.25rem;
         padding: 0.75rem 1.25rem;
+    }
+
+    .content-header {
+        margin: -1.25rem -1.25rem 1.25rem -1.25rem;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .btn-view-site span {
+        display: none;
+    }
+
+    .btn-view-site {
+        padding: 6px;
     }
 
     .stats-grid {
